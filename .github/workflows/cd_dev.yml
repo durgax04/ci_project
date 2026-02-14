@@ -17,35 +17,4 @@ jobs:
 
             - name: Deploy via SSH
               run: |
-                ssh -i ~/.ssh/ssh_key ubuntu@"${{ secrets.EC2_HOST }}" /usr/bin/bash << 'EOF'
-                    set -e
-                    # install node if not
-                    if ! command -v node &> /dev/null; then
-                        curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-                        sudo apt-get install -y nodejs
-                    fi
-                    
-                    if ! command -v pnpm &> /dev/null; then 
-                        sudo npm install -g pnpm
-                    fi
-
-                    if [ ! -d "ci_project" ]; then
-                        git clone https://github.com/durgax04/ci_project.git
-                    fi
-
-                    cd ci_project
-                    git fetch origin
-                    git reset --hard origin/main
-                    git clean -fd
-                    pnpm install
-                    pnpm build
-
-                    if ! command -v pm2 &> /dev/null 
-                    then 
-                        sudo npm install -g pm2
-                    fi
-
-                    pm2 restart http-server
-                    pm2 restart web-server
-                    pm2 restart ws-server 
-                EOF
+                ssh -i ~/.ssh/ssh_key ubuntu@"${{ secrets.EC2_HOST }}" /usr/bin/bash -t "cd ci_project && git pull && pnpm install && pnpm build && pm2 restart http-server && pm2 restart web-server && pm2 restart ws-server"
