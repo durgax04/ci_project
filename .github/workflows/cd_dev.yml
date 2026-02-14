@@ -1,0 +1,26 @@
+name: Deploy to dev environment
+on:
+    push:
+        branches:
+            - "main"
+jobs:
+    redeploy_everything:
+        name: Deploying everyting to the dev envirnment
+        runs-on: ubuntu-latest
+        steps:
+            - name: Setup SSH
+              run: |
+                echo ${{ secrets.SSH_PRIVATE_KEY }} > ~/.ssh/ssh_key
+                chmod 600 ~/.ssh/ssh_key
+                ssh-keyscan -H ${{secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
+            - name: Deploy via SSH
+              run: |
+                ssh ubuntu@${{ secrets.EC2_HOST }}
+                cd ci-project
+                git pull origin main
+                pnpm install
+                pnpm build
+                pm2 restart http-server
+                pm2 restart web-server
+                pm2 restart ws-server 
