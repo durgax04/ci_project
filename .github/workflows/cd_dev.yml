@@ -10,6 +10,7 @@ jobs:
         steps:
             - name: Setup SSH
               run: |
+                mkdir -p ~/.ssh
                 echo ${{ secrets.SSH_PRIVATE_KEY }} > ~/.ssh/ssh_key
                 chmod 600 ~/.ssh/ssh_key
                 ssh-keyscan -H ${{secrets.EC2_HOST }} >> ~/.ssh/known_hosts
