@@ -13,8 +13,7 @@ jobs:
                 mkdir -p ~/.ssh
                 echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/ssh_key
                 chmod 600 ~/.ssh/ssh_key
-                ssh-keyscan -H "${{secrets.EC2_HOST }}" >> ~/.ssh/known_hosts
 
             - name: Deploy via SSH
               run: |
-                ssh -i ~/.ssh/ssh_key ubuntu@"${{ secrets.EC2_HOST }}" -t "cd ci_project && git pull && pnpm install && pnpm build && pm2 restart http-server && pm2 restart web-server && pm2 restart ws-server"
+                ssh -i ~/.ssh/ssh_key -o StrictHostKeyChecking=no ubuntu@"${{ secrets.EC2_HOST }}" -t "cd ci_project && git pull && pnpm install && pnpm build && pm2 restart http-server && pm2 restart web-server && pm2 restart ws-server"
