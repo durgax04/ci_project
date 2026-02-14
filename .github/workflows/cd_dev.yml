@@ -17,7 +17,7 @@ jobs:
 
             - name: Deploy via SSH
               run: |
-                ssh ubuntu@"${{ secrets.EC2_HOST }}" /usr/bin/bash << 'EOF'
+                ssh ~/.ssh/ssh_key ubuntu@"${{ secrets.EC2_HOST }}" /usr/bin/bash << 'EOF'
                     cd ci-project
                     git pull origin main
                     pnpm install
