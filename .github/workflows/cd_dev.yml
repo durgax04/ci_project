@@ -17,4 +17,4 @@ jobs:
 
             - name: Deploy via SSH
               run: |
-                ssh -i ~/.ssh/ssh_key ubuntu@"${{ secrets.EC2_HOST }}" /usr/bin/bash -t "cd ci_project && git pull && pnpm install && pnpm build && pm2 restart http-server && pm2 restart web-server && pm2 restart ws-server"
+                ssh -i ~/.ssh/ssh_key ubuntu@"${{ secrets.EC2_HOST }}" -t "cd ci_project && git pull && pnpm install && pnpm build && pm2 restart http-server && pm2 restart web-server && pm2 restart ws-server"
