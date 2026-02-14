@@ -30,7 +30,7 @@ jobs:
                     fi
 
                     if [ ! -d "ci_project" ]; then
-                        git clone https://github.com/durgax04/ci_project.git ci-project
+                        git clone https://github.com/durgax04/ci_project.git
                     fi
 
                     cd ci-project
