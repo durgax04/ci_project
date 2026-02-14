@@ -17,11 +17,12 @@ jobs:
 
             - name: Deploy via SSH
               run: |
-                ssh ubuntu@"${{ secrets.EC2_HOST }}"
-                cd ci-project
-                git pull origin main
-                pnpm install
-                pnpm build
-                pm2 restart http-server
-                pm2 restart web-server
-                pm2 restart ws-server 
+                ssh ubuntu@"${{ secrets.EC2_HOST }}" << 'EOF'
+                    cd ci-project
+                    git pull origin main
+                    pnpm install
+                    pnpm build
+                    pm2 restart http-server
+                    pm2 restart web-server
+                    pm2 restart ws-server 
+                EOF
