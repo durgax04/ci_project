@@ -1,13 +1,17 @@
-import {prisma} from "@repo/db";
+import { prisma } from "@repo/db";
 
 export default async function Home() {
-  
-  const users= await prisma.user.findMany();
+  const users = await prisma.user.findMany();
 
   return (
-   <div>
+    <div>
       {users.map((user) => (
-        <div key={user.id}>Username: {user.username} - Password: {user.password}</div>
+        <div
+          key={user.id}
+          style={{ border: "1px solid #222121", margin: "12px", padding: "4px" }}
+        >
+          Username: {user.username} - Password: {user.password}
+        </div>
       ))}
     </div>
   );
