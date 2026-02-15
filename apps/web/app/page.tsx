@@ -13,7 +13,7 @@ export default async function Home() {
           Username: {user.username}
         </div>
       ))}
-      <p>New</p>
+      <p>New @ddd create pull</p>
     </div>
   );
 }
