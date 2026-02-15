@@ -1,11 +1,11 @@
-name: Deploy to dev environment
+name: Deploy to prod environment
 on:
     push:
         branches:
             - "production"
 jobs:
     redeploy_everything:
-        name: Deploying everyting to the dev envirnment
+        name: Deploying everyting to the prod envirnment
         runs-on: ubuntu-latest
         steps:
             - name: Setup SSH
