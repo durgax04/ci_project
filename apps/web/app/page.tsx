@@ -10,7 +10,7 @@ export default async function Home() {
           key={user.id}
           style={{ border: "1px solid #222121", margin: "12px", padding: "4px" }}
         >
-          Username: {user.username} - Password: {user.password}
+          Username: {user.username}
         </div>
       ))}
       <p>New @ddd</p>
