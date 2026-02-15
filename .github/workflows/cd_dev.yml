@@ -16,4 +16,4 @@ jobs:
 
             - name: Deploy via SSH
               run: |
-                ssh -i ~/.ssh/ssh_key -o StrictHostKeyChecking=no ubuntu@"${{ secrets.EC2_HOST }}" -t "cd ci_project && git pull && pnpm install && pnpm build && pm2 restart http-server && pm2 restart web-server && pm2 restart ws-server"
+                ssh -i ~/.ssh/ssh_key -o StrictHostKeyChecking=no ubuntu@"${{ secrets.EC2_HOST }}" -t "cd ci_project && git fetch origin && git reset --hard origin/main && pnpm install && pnpm build && pm2 restart http-server && pm2 restart web-server && pm2 restart ws-server"
