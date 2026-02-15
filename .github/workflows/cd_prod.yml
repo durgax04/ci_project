@@ -1,0 +1,19 @@
+name: Deploy to dev environment
+on:
+    push:
+        branches:
+            - "production"
+jobs:
+    redeploy_everything:
+        name: Deploying everyting to the dev envirnment
+        runs-on: ubuntu-latest
+        steps:
+            - name: Setup SSH
+              run: |
+                mkdir -p ~/.ssh
+                echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/ssh_key
+                chmod 600 ~/.ssh/ssh_key
+
+            - name: Deploy via SSH
+              run: |
+                ssh -i ~/.ssh/ssh_key -o StrictHostKeyChecking=no ubuntu@"${{ secrets.EC2_HOST_PROD }}" -t "cd ci_project && git pull && pnpm install && pnpm build && pm2 restart http-server && pm2 restart web-server && pm2 restart ws-server"
