@@ -13,8 +13,8 @@ export default async function Home() {
           Username: {user.username}
         </div>
       ))}
-      <p>New @ddd create pull</p>
-      <h1>Testing CICD</h1>
+      
+     
     </div>
   );
 }
