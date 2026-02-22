@@ -23,5 +23,5 @@ jobs:
                     pnpm install && 
                     pnpm build && 
                     pm2 restart http-server && 
-                    pm2 restart web-server && 
+                    pm2 restart web && 
                     pm2 restart ws-server"
