@@ -13,8 +13,6 @@ export default async function Home() {
           Username: {user.username}
         </div>
       ))}
-      
-     
     </div>
   );
 }
