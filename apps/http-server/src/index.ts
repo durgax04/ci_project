@@ -10,6 +10,12 @@ interface User {
 const app = express();
 app.use(express.json());
 
+app.use("/", (req, res) => {
+    res.json({
+        "message": "HTTP server is runnning..."
+    });
+});
+
 
 app.use("/signup", async (req, res) => {
     const { username, password } = req.body as User;
