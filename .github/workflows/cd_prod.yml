@@ -18,7 +18,9 @@ jobs:
               run: |
                 ssh -i ~/.ssh/ssh_key -o StrictHostKeyChecking=no ubuntu@"${{ secrets.EC2_HOST_PROD }}" -t "
                     cd ci_project && 
-                    git pull && 
+                    git fetch --all && 
+                    git remote prune origin && 
+                    git reset --hard origin/main &&
                     pnpm install && 
                     pnpm build && 
                     pm2 restart http-server && 
