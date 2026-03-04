@@ -1,5 +1,7 @@
 import { prisma } from "@repo/db";
 
+export const dynamic = "force-dynamic";
+
 type User = {
   id: string;
   username: string;
