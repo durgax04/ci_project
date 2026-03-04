@@ -24,11 +24,11 @@ export default async function Home() {
           <div
             key={user.id}
             style={{
-              border: "1px solid #ddd",
+              border: "1px solid #dddddd00",
               borderRadius: "8px",
               padding: "12px",
               marginBottom: "10px",
-              backgroundColor: "#fafafa",
+              backgroundColor: "#fafafa33",
             }}
           >
             <strong>Username:</strong> {user.username}
