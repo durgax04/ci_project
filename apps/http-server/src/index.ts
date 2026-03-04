@@ -10,7 +10,7 @@ interface User {
 const app = express();
 app.use(express.json());
 
-app.use("/", (req, res) => {
+app.use("/me", (req, res) => {
     res.json({
         "message": "HTTP server is runnning..."
     });
