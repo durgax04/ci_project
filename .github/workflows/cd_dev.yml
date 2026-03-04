@@ -16,13 +16,10 @@ jobs:
 
             - name: Deploy via SSH
               run: |
-                ssh -i ~/.ssh/ssh_key -o StrictHostKeyChecking=no ubuntu@"${{ secrets.EC2_HOST }}" -t "
-                    source ~/.bashrc
+                ssh -i ~/.ssh/ssh_key -o StrictHostKeyChecking=no ubuntu@"${{ secrets.EC2_HOST }}" -t "z
                     cd ci_project && 
                     git fetch origin && 
                     git reset --hard origin/main &&
-                    echo 'Installing pnpm if missing...' &&
-                    sudo npm install -g pnpm &&
                     pnpm install && 
                     pnpm build && 
                     pm2 restart http-server && 
