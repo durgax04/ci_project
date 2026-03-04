@@ -16,7 +16,6 @@ app.use("/me", (req, res) => {
     });
 });
 
-
 app.use("/signup", async (req, res) => {
     const { username, password } = req.body as User;
 
