@@ -1,19 +1,46 @@
 import { prisma } from "@repo/db";
 
+export const dynamic = "force-dynamic";
+
+type User = {
+  id: string;
+  username: string;
+  password: string;
+};
+
 export default async function Home() {
-  const users = await prisma.user.findMany();
+  const users: User[] = await prisma.user.findMany();
 
   return (
-    <div>
-      {users.map((user) => (
-        <div
-          key={user.id}
-          style={{ border: "1px solid #222121", margin: "12px", padding: "4px" }}
-        >
-          Username: {user.username}
-        </div>
-      ))}
-      <h1>Hiiiii</h1>
+    <div
+      style={{
+        maxWidth: "600px",
+        margin: "40px auto",
+        fontFamily: "Arial, sans-serif",
+      }}
+    >
+      <h1 style={{ textAlign: "center" }}>Users</h1>
+
+      <div>
+        {users.map((user: User) => (
+          <div
+            key={user.id}
+            style={{
+              border: "1px solid #dddddd00",
+              borderRadius: "8px",
+              padding: "12px",
+              marginBottom: "10px",
+              backgroundColor: "#fafafa33",
+            }}
+          >
+            <strong>Username:</strong> {user.username}
+          </div>
+        ))}
+      </div>
+
+      <p style={{ textAlign: "center", marginTop: "20px", color: "gray" }}>
+        Total Users: {users.length}
+      </p>
     </div>
   );
 }
