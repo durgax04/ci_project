@@ -22,7 +22,7 @@ jobs:
                     git fetch origin && 
                     git reset --hard origin/main &&
                     echo 'Installing pnpm if missing...' &&
-                    npm install -g pnpm &&
+                    sudo npm install -g pnpm &&
                     pnpm install && 
                     pnpm build && 
                     pm2 restart http-server && 
